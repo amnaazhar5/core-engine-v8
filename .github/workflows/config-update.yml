@@ -1,0 +1,23 @@
+name: System Security Sync
+
+on:
+  schedule:
+    - cron: '0 22 * * *'
+  workflow_dispatch:
+
+jobs:
+  health-check:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Update System Logs
+        run: |
+          git config --global user.name "amnaazhar5"
+          git config --global user.email "mehmoodazhar3729@gmail.com"
+          echo "System Status Check: $(date)" > logs.txt
+          git add logs.txt
+          git commit -m "Automated system integrity sync"
+          git push
+          
